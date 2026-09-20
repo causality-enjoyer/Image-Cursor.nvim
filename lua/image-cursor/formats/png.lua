@@ -40,7 +40,7 @@ function M.dimensions(path)
 		return nil
 	end
 
-	if header:sub(13, 16) ~= PNG_SIGNATURE then
+	if header:sub(1, 8) ~= PNG_SIGNATURE then
 		return nil
 	end
 

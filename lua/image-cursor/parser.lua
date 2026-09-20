@@ -24,4 +24,20 @@ function M.extract_image_path(line)
 	return trimmed:sub(open_paren + 1, close_paren - 1)
 end
 
+--- Resolve the path of the file into absolute filesystem path
+--- @param raw_path string the path as written inside ![]( )
+--- @param bufnr integer the buffer the markdown file is in, used to
+---   resolve relative paths against that file's directory
+--- @return string absolute_path
+function M.resolve_path(raw_path, bufnr)
+	local path = raw_path:gsub("%%20", " ") -- incase the user has file names with spaces inside them.
+
+	if path:sub(1, 1) == "/" or path:sub(1, 1) == "~" then
+		return vim.fn.expand(path)
+	end
+
+	local buffer_directory = vim.fn.expand("#" .. bufnr .. ":p:h")
+	return buffer_directory .. "/" .. path
+end
+
 return M

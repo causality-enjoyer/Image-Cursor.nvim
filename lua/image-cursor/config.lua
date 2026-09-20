@@ -4,7 +4,7 @@ local M = {}
 
 M.defaults = {
 	-- filetypes to watch for plugin usage.
-	filetypes = { "markdown", "md" },
+	filetypes = { "markdown" },
 
 	-- maximum size of preview, in terminal cell units.
 	max_width_cells = 40,

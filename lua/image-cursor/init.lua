@@ -44,7 +44,7 @@ local function update_preview_for_cursor()
 		cursor_row_in_window,
 		window_height,
 		opts.max_height_cells,
-		opts.mini_height_cells
+		opts.min_height_cells
 	)
 
 	if start_row == nil then
