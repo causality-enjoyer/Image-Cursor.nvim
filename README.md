@@ -6,10 +6,10 @@ The basic idea is to fetch the line of the cursor in the visible window, using N
 
 # Requirements
 
-- Noevim 0.13+ (I built it straight from source, currently the latest version available is only 0.12.5)
+- Noevim 0.13+ (I built it straight from source, as the currently latest version available is only 0.12.5)
     - To build from source, either follow the [Nvim development (prerelease) build guide](https://github.com/neovim/neovim/releases)
     - Or simply: clone the repo: `git clone https://github.com/neovim/neovim`
-    - then, (for Linux) hit 2 commands:
+    - then, (for Linux) hit 2 commands inside the repo directory:
         - `make CMAKE_BUILD_TYPE=RelWithDebInfo`
         - `sudo make install`
     - and viola, nvim 0.13 is installed.
@@ -106,6 +106,15 @@ lua/image-cursor/
     - it has no dependency on vim global, its just functions and plain numbers.
 2. Neovim embeds with LuaJit, as I did find `string.pack`/`string.unpack` functions to read binary, but couldn't make them work with LuaJit.
 3. This is my first time building anything with `Lua`, so its bodged project, not a fully realized one yet. I'm more used to `C`.
+
+# Screenshots
+
+1. When the cursor is too low on the window
+    - ![If the cursor is at the bottom, the image is displayed above the line](attachments/cursor-low.png)
+2. Normal condition, when the cursor is at the middle
+    - ![Normal Condition, in the middle of the screen](attachments/normal-conditions.png)
+3. When the cursor is at far-right, the image is still within bounds, by shifting the image behind the cursor's position
+    - ![Even when the cursor is at far right, image rendering happens within the window's bounds](attachments/cursor-far-right.png)
 
 # License
 
