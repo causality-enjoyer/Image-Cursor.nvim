@@ -15,7 +15,7 @@ local function update_preview_for_cursor()
 	end
 
 	local bufnr = vim.api.nvim_get_current_buf()
-	local cursor_line = vim.api.nvim_get_cursor(win)[1]
+	local cursor_line = vim.api.nvim_win_get_cursor(win)[1]
 	local line_text = vim.api.nvim_get_current_line()
 
 	local raw_path = parser.extract_image_path(line_text)
