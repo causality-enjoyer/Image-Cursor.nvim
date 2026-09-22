@@ -24,7 +24,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "yourname/image-cursor.nvim",
+  "causality-enjoyer/image-cursor.nvim",
   ft = { "markdown" },
   opts = {},
 }
