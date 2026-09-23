@@ -5,23 +5,40 @@ local M = {}
 function M.extract_image_path(line)
 	local trimmed = vim.trim(line)
 
-	if trimmed:sub(1, 2) ~= "![" then
-		return nil
+	-- check for bullet points, followed by image syntax
+	if trimmed:match("^([*-])!\\[") then
+		local alt_text_end = trimmed:find("%]%(")
+		if not alt_text_end then
+			return nil
+		end
+
+		local open_paren = alt_text_end + 1
+
+		local close_paren = trimmed:find("%)([^%)]*)$")
+		if not close_paren then
+			return nil
+		end
+
+		return trimmed:sub(open_paren + 1, close_paren - 1)
 	end
 
-	local alt_text_end = trimmed:find("%]%(")
-	if not alt_text_end then
-		return nil
+	-- check for normal image syntax
+	if trimmed:sub(1, 2) == "![" then
+		local alt_text_end = trimmed:find("%]%(")
+		if not alt_text_end then
+			return nil
+		end
+
+		local open_paren = alt_text_end + 1
+
+		local close_paren = trimmed:find("%)([^%)]*)$")
+		if not close_paren then
+			return nil
+		end
+		return trimmed:sub(open_paren + 1, close_paren - 1)
 	end
 
-	local open_paren = alt_text_end + 1
-
-	local close_paren = trimmed:find("%)([^%)]*)$")
-	if not close_paren then
-		return nil
-	end
-
-	return trimmed:sub(open_paren + 1, close_paren - 1)
+	return nil
 end
 
 --- Resolve the path of the file into absolute filesystem path
